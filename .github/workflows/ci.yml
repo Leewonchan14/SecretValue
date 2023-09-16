@@ -29,11 +29,11 @@ jobs:
         run: |
           cd src/main/resources
           echo "${{ secrets.SECRET }}" > secret.properties
-          cat secret.properties
-          source .bashrc
+#          cat secret.properties
+#          source .bashrc
           
-          gh secret set "DOCKER_USERNAME" -b "${DOCKER_USERNAME}"
-          gh secret set "DOCKER_PASSWORD" -b "${DOCKER_PASSWORD}"
+#          gh secret set "DOCKER_USERNAME" -b "${DOCKER_USERNAME}"
+#          gh secret set "DOCKER_PASSWORD" -b "${DOCKER_PASSWORD}"
 
 
       - name: Set up JDK 17
@@ -50,6 +50,10 @@ jobs:
 
       - name: Docker image build
         run: |
-          docker build -t ${secrets.DOCKER_USERNAME}/secret .
-          docker login -u ${secrets.DOCKER_USERNAME} -p ${secrets.DOCKER_PASSWORD}
-          docker push ${secrets.DOCKER_USERNAME}/secret
+          cd src/main/resources
+          source .bashrc
+          cd ../../..
+          
+          docker build -t ${DOCKER_USERNAME}/secret .
+          docker login -u ${secrets.DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+          docker push ${DOCKER_USERNAME}/secret
