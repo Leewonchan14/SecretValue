@@ -42,6 +42,6 @@ jobs:
 
       - name: Docker image build
         run: |
-          docker build -t ${{ secrets.SECRET.DOCKER_USERNAME }}/secret .
-          docker login -u ${{ secrets.SECRET.DOCKER_USERNAME }} -p ${{ secrets.SECRET.DOCKER_PASSWORD }}
-          docker push ${{ secrets.SECRET.DOCKER_USERNAME }}/secret
+          docker build -t ${DOCKER_USERNAME}/secret .
+          docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+          docker push ${DOCKER_USERNAME}/secret
