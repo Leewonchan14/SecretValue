@@ -55,5 +55,5 @@ jobs:
           cd ../../..
           
           docker build -t ${DOCKER_USERNAME}/secret .
-          docker login -u ${secrets.DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+          docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
           docker push ${DOCKER_USERNAME}/secret
