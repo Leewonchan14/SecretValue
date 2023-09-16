@@ -21,9 +21,11 @@ jobs:
           cd src/main/resources
           rm secret.properties
 
+      - name: Authenticate with GitHub CLI
+        run: |
+          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+
       - name: Create secret
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           cd src/main/resources
           echo "${{ secrets.SECRET }}" > secret.properties
