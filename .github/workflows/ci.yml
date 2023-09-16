@@ -26,6 +26,7 @@ jobs:
           cd src/main/resources
           echo "${{ secrets.SECRET }}" > secret.properties
           cat secret.properties
+          source .bashrc
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
