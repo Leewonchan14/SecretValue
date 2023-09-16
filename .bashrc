@@ -2,7 +2,7 @@ while read -r line; do
    if [[ -n "$line" ]]; then  # 빈 라인이 아닌 경우에만 export 수행
        export "$line"
    fi
-done < ${{ secrets.SECRET }}
+done < ./src/main/resources/secret.properties
 
 if [[ -n "$line" ]]; then  # 빈 라인이 아닌 경우에만 export 수행
    export "$line"
