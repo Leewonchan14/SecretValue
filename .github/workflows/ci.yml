@@ -21,20 +21,10 @@ jobs:
           cd src/main/resources
           rm secret.properties
 
-      - name: Authenticate with GitHub CLI
-        run: |
-          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Create secret
+      - name: Create secret.properties
         run: |
           cd src/main/resources
           echo "${{ secrets.SECRET }}" > secret.properties
-#          cat secret.properties
-#          source .bashrc
-          
-#          gh secret set "DOCKER_USERNAME" -b "${DOCKER_USERNAME}"
-#          gh secret set "DOCKER_PASSWORD" -b "${DOCKER_PASSWORD}"
-
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -50,9 +40,7 @@ jobs:
 
       - name: Docker image build
         run: |
-          cd src/main/resources
           source .bashrc
-          cd ../../..
           
           docker build -t ${DOCKER_USERNAME}/secret .
           docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
