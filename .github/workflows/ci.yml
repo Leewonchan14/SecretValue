@@ -22,15 +22,17 @@ jobs:
           rm secret.properties
 
       - name: Create secret
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd src/main/resources
           echo "${{ secrets.SECRET }}" > secret.properties
           cat secret.properties
           source .bashrc
           
-#          gh auth login --with-token < "${{ secrets.GITHUB_TOKEN }}"
-#          gh secret set "DOCKER_USERNAME" -b "${DOCKER_USERNAME}"
-#          gh secret set "DOCKER_PASSWORD" -b "${DOCKER_PASSWORD}"
+          gh auth login --with-token <<< "${GH_TOKEN}"
+          gh secret set "DOCKER_USERNAME" -b "${DOCKER_USERNAME}"
+          gh secret set "DOCKER_PASSWORD" -b "${DOCKER_PASSWORD}"
 
 
       - name: Set up JDK 17
