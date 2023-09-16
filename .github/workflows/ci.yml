@@ -44,4 +44,4 @@ jobs:
           
           docker build -t ${DOCKER_USERNAME}/secret:${{ github.sha }} .
           docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-          docker push ${DOCKER_USERNAME}/secret
+          docker push ${DOCKER_USERNAME}/secret:${{ github.sha }}
